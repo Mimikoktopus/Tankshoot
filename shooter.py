@@ -29,7 +29,9 @@ Feinde     = [[30, 30]]
 Fadenkreuz = pygame.image.load("Fadenkreuz.png")
 Hintergrund= pygame.image.load("Hintergrund.jpg")
 Soldat     = pygame.image.load("Panzer.png")
-FeindB      = pygame.image.load("Feind.png")
+FeindB     = pygame.image.load("Feind.png")
+Panzer     = pygame.image.load("PanzerUntersatz.png")
+PanzerK    = pygame.image.load("PanzerKanonenturm.png")
 Schuss     = pygame.mixer.Sound("Schuss.mp3")
 Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
 
@@ -71,7 +73,7 @@ while spielaktiv:
     Px = MausP[0] - PlayerX
     Py = MausP[1] - PlayerY
     Soldatw2 = math.degrees (math.atan2 (-Py,Px))
-    Soldatw =pygame.transform.rotate(Soldat, Soldatw2)
+    Soldatw =pygame.transform.rotate(PanzerK, Soldatw2)
     window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
     
     for Feind in Feinde:
