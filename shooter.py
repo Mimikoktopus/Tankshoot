@@ -23,9 +23,7 @@ KugelX     = PlayerX
 KugelY     = PlayerY
 KugelXG    = 4
 KugelYG    = 4
-FeindX     = 30
-FeindY     = 30
-Feinde     = [(30, 30)]
+Feinde     = [[30, 30]]
 
 #Bider, Sounds import
 Fadenkreuz = pygame.image.load("Fadenkreuz.png")
@@ -37,8 +35,6 @@ Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObjec
 
 #Funktions Blog
 def Feindreturn():
-    global FeindY
-    global FeindX
     global infoObject
     Seite  = random.randint(1,4)
     if Seite == 1:
@@ -53,6 +49,7 @@ def Feindreturn():
     if Seite == 4:
         FeindX = infoObject.current_h
         FeindY = random.randint(-1000,infoObject.current_h + 1000)
+    Feinde.append([FeindX, FeindY])
 
 clock = pygame.time.Clock()
 pygame.display.set_caption("Pong")
@@ -76,12 +73,6 @@ while spielaktiv:
     Soldatw2 = math.degrees (math.atan2 (-Py,Px))
     Soldatw =pygame.transform.rotate(Soldat, Soldatw2)
     window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
-
-    Fx = PlayerX - FeindX
-    Fy = PlayerY - FeindY
-    Feindw2 = math.degrees (math.atan2 (-Fy,Fx))
-    Feindw =pygame.transform.rotate(FeindB, Feindw2)
-    window.blit(Feindw, (FeindX - FeindB.get_width()/2, FeindY - FeindB.get_height()/2))
     
     for Feind in Feinde:
         Fx = PlayerX - Feind[0]
@@ -97,24 +88,34 @@ while spielaktiv:
     #pygame.draw.rect(window, (SCHWARZ), rect)
     pygame.display.flip()
     clock.tick(60)
-    FeindXG = (FeindX-PlayerX)/100
-    FeindYG = (FeindY-PlayerY)/100  
-    divisor = abs(FeindXG)
-    if abs(FeindYG) > divisor:
-        divisor = abs(FeindYG)
-    FeindYG  = FeindYG/divisor
-    FeindXG  = FeindXG/divisor  
-    FeindYG  = FeindYG * -5
-    FeindXG  = FeindXG * -5
-    FeindX   = FeindX + FeindXG
-    FeindY   = FeindY + FeindYG
+
+    for Feind in Feinde:  
+        FeindX = Feind[0]
+        FeindY = Feind[1]
+        FeindXG = (FeindX-PlayerX)/100
+        FeindYG = (FeindY-PlayerY)/100  
+        divisor = abs(FeindXG)
+        if abs(FeindYG) > divisor:
+            divisor = abs(FeindYG)
+        FeindYG  = FeindYG/divisor
+        FeindXG  = FeindXG/divisor  
+        FeindYG  = FeindYG * -5
+        FeindXG  = FeindXG * -5
+        Feind[0]   = FeindX + FeindXG
+        Feind[1]   = FeindY + FeindYG
+
     if Kugelaktiv :
-        FeindXA = FeindX - KugelX
-        FeindYA = FeindY - KugelY
-        FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
-        if FeindA < 35 :
-            Feindreturn()   # Feind Hitbox
-            Kugelaktiv = False
+        for i in range(len(Feinde)):
+            Feind   = Feinde[i]   
+            FeindX  = Feind[0]
+            FeindY  = Feind[1]
+            FeindXA = FeindX - KugelX
+            FeindYA = FeindY - KugelY
+            FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
+            if FeindA < 35 :
+                del Feinde[i]
+                Feindreturn()   # Feind Hitbox
+                Kugelaktiv = False
     FeindXA = FeindX - PlayerX
     FeindYA = FeindY - PlayerY
     FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
