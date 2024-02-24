@@ -34,6 +34,8 @@ FeindB     = pygame.image.load("Feind.png")
 Panzer     = pygame.image.load("PanzerUntersatz.png")
 PanzerK    = pygame.image.load("PanzerKanonenturm.png")
 Schuss     = pygame.mixer.Sound("Schuss.mp3")
+Music      = pygame.mixer.music.load("Music.mp3")
+pygame.mixer.music.play(-1)
 Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
 
 #Funktions Blog
