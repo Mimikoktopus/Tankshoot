@@ -19,6 +19,7 @@ infoObject = pygame.display.Info()
 window     = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
 PlayerX    = infoObject.current_w /2
 PlayerY    = infoObject.current_h /2
+PlayerR    = 0
 KugelX     = PlayerX
 KugelY     = PlayerY
 KugelXG    = 4
@@ -69,6 +70,9 @@ while spielaktiv:
         pygame.draw.circle(window, (ORANGE), (KugelX, KugelY), 5)
         KugelX  = KugelX + KugelXG
         KugelY  = KugelY + KugelYG
+    
+    Soldatw =pygame.transform.rotate(Panzer, PlayerR)
+    window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
     
     Px = MausP[0] - PlayerX
     Py = MausP[1] - PlayerY
@@ -137,13 +141,15 @@ while spielaktiv:
     keys  = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
     if keys[pygame.K_w]:
-        PlayerY = PlayerY-10
+        PlayerX += math.cos(math.radians(-PlayerR))*5
+        PlayerY += math.sin(math.radians(-PlayerR))*5
     if keys[pygame.K_s]:
-        PlayerY = PlayerY+10
+        PlayerX += math.cos(math.radians(-PlayerR))*-5
+        PlayerY += math.sin(math.radians(-PlayerR))*-5
     if keys[pygame.K_a]:
-        PlayerX = PlayerX-10
+        PlayerR = PlayerR -3
     if keys[pygame.K_d]:
-        PlayerX = PlayerX+10
+        PlayerR = PlayerR -3
     if keys[pygame.K_ESCAPE]:
         spielaktiv = False
     if mouse[0] and (not Kugelaktiv):
