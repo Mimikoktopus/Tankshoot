@@ -25,12 +25,13 @@ KugelXG    = 4
 KugelYG    = 4
 FeindX     = 30
 FeindY     = 30
+Feinde     = [(30, 30)]
 
 #Bider, Sounds import
 Fadenkreuz = pygame.image.load("Fadenkreuz.png")
 Hintergrund= pygame.image.load("Hintergrund.jpg")
 Soldat     = pygame.image.load("Panzer.png")
-Feind      = pygame.image.load("Feind.png")
+FeindB      = pygame.image.load("Feind.png")
 Schuss     = pygame.mixer.Sound("Schuss.mp3")
 Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
 
@@ -52,8 +53,6 @@ def Feindreturn():
     if Seite == 4:
         FeindX = infoObject.current_h
         FeindY = random.randint(-1000,infoObject.current_h + 1000)
-
-
 
 clock = pygame.time.Clock()
 pygame.display.set_caption("Pong")
@@ -81,8 +80,17 @@ while spielaktiv:
     Fx = PlayerX - FeindX
     Fy = PlayerY - FeindY
     Feindw2 = math.degrees (math.atan2 (-Fy,Fx))
-    Feindw =pygame.transform.rotate(Feind, Feindw2)
-    window.blit(Feindw, (FeindX - Feind.get_width()/2, FeindY - Feind.get_height()/2))
+    Feindw =pygame.transform.rotate(FeindB, Feindw2)
+    window.blit(Feindw, (FeindX - FeindB.get_width()/2, FeindY - FeindB.get_height()/2))
+    
+    for Feind in Feinde:
+        Fx = PlayerX - Feind[0]
+        Fy = PlayerY - Feind[1]
+        Feindw2 = math.degrees (math.atan2 (-Fy,Fx))
+        Feindw =pygame.transform.rotate(FeindB, Feindw2)
+        window.blit(Feindw, (Feind[0] - FeindB.get_width()/2, Feind[1] - FeindB.get_height()/2))
+
+    
     FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
     window.blit(Fadenkreuz, FadenkreuzP)
     #rect = pygame.Rect(infoObject.current_w /4, infoObject.current_h /4, infoObject.current_w /2, 50)
