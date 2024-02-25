@@ -34,6 +34,7 @@ FeindB     = pygame.image.load("Feind.png")
 Panzer     = pygame.image.load("PanzerUntersatz.png")
 PanzerK    = pygame.image.load("PanzerKanonenturm.png")
 Schuss     = pygame.mixer.Sound("Schuss.mp3")
+TodG       = pygame.mixer.Sound("TodG.mp3")
 Music      = pygame.mixer.music.load("Music.mp3")
 pygame.mixer.music.play(-1)
 Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
@@ -52,7 +53,7 @@ def Feindreturn():
         FeindX = -1000
         FeindY = random.randint(-1000,infoObject.current_h + 1000)
     if Seite == 4:
-        FeindX = infoObject.current_h
+        FeindX = infoObject.current_h +1000
         FeindY = random.randint(-1000,infoObject.current_h + 1000)
     Feinde.append([FeindX, FeindY])
 
@@ -123,6 +124,7 @@ while spielaktiv:
             if FeindA < 35 :
                 del Feinde[i]
                 Feindreturn()   # Feind Hitbox
+                pygame.mixer.Sound.play(TodG)
                 Kugelaktiv = False
     FeindXA = FeindX - PlayerX
     FeindYA = FeindY - PlayerY
@@ -149,7 +151,7 @@ while spielaktiv:
         PlayerX += math.cos(math.radians(-PlayerR))*-5
         PlayerY += math.sin(math.radians(-PlayerR))*-5
     if keys[pygame.K_a]:
-        PlayerR = PlayerR -3
+        PlayerR = PlayerR +3
     if keys[pygame.K_d]:
         PlayerR = PlayerR -3
     if keys[pygame.K_ESCAPE]:
