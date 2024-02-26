@@ -30,15 +30,15 @@ Feinde     = [[30, 30]]
 Fadenkreuz = pygame.image.load("Fadenkreuz.png")
 Hintergrund= pygame.image.load("Hintergrund.jpg")
 Soldat     = pygame.image.load("Panzer.png")
-Gameover   = pygame.image.load("Gameover.png")
+Gameover   = pygame.image.load("Gameover.jpg")
 FeindB     = pygame.image.load("Feind.png")
 Panzer     = pygame.image.load("PanzerUntersatz.png")
 PanzerK    = pygame.image.load("PanzerKanonenturm.png")
 Schuss     = pygame.mixer.Sound("Schuss.mp3")
 TodG       = pygame.mixer.Sound("TodG.mp3")
 Music      = pygame.mixer.music.load("Music.mp3")
-pygame.mixer.music.play(-1)
-Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
+#pygame.mixer.music.play(-1)
+#Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
 
 #Funktions Blog
 def Feindreturn():
@@ -65,7 +65,7 @@ pygame.mouse.set_visible(0)
 
 spielaktiv = True
 Kugelaktiv = False
-GameoverS  = False
+GameoverS  = True
 
 while spielaktiv:
     if GameoverS == False:
@@ -181,3 +181,13 @@ while spielaktiv:
             PlayerX = infoObject.current_w -20
         if PlayerY > infoObject.current_h -20 :
             PlayerY = infoObject.current_h-20
+    else:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                spielaktiv = False
+        pygame.display.flip()
+        clock.tick(60)
+        window.blit(Gameover, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
+        keys  = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            spielaktiv = False 
