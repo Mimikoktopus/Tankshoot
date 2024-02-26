@@ -36,9 +36,11 @@ Panzer     = pygame.image.load("PanzerUntersatz.png")
 PanzerK    = pygame.image.load("PanzerKanonenturm.png")
 Schuss     = pygame.mixer.Sound("Schuss.mp3")
 TodG       = pygame.mixer.Sound("TodG.mp3")
+TodS       = pygame.mixer.Sound("TodS.mp3")
 Music      = pygame.mixer.music.load("Music.mp3")
-#pygame.mixer.music.play(-1)
-#Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
+pygame.mixer.music.play(-1)
+Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
+Gameover   = pygame.transform.scale(Gameover,(infoObject.current_w, infoObject.current_h))
 
 #Funktions Blog
 def Feindreturn():
@@ -65,7 +67,7 @@ pygame.mouse.set_visible(0)
 
 spielaktiv = True
 Kugelaktiv = False
-GameoverS  = True
+GameoverS  = False
 
 while spielaktiv:
     if GameoverS == False:
@@ -133,7 +135,8 @@ while spielaktiv:
         FeindYA = FeindY - PlayerY
         FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
         if FeindA < 80:
-            spielaktiv = False    # Player Hitbox
+            pygame.mixer.Sound.play(TodS)
+            GameoverS = True    # Player Hitbox
         if KugelX < 0 :
             Kugelaktiv = False
         if KugelY < 0 :
@@ -182,6 +185,7 @@ while spielaktiv:
         if PlayerY > infoObject.current_h -20 :
             PlayerY = infoObject.current_h-20
     else:
+        pygame.mixer.music.pause()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 spielaktiv = False
@@ -191,3 +195,5 @@ while spielaktiv:
         keys  = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             spielaktiv = False 
+        if keys[pygame.K_RETURN]:
+            GameoverS = False
