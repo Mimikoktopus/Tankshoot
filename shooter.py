@@ -145,11 +145,11 @@ while spielaktiv:
     keys  = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
     if keys[pygame.K_w]:
-        PlayerX += math.cos(math.radians(-PlayerR))*5
-        PlayerY += math.sin(math.radians(-PlayerR))*5
+        PlayerX += math.cos(math.radians(-PlayerR))*7
+        PlayerY += math.sin(math.radians(-PlayerR))*7
     if keys[pygame.K_s]:
-        PlayerX += math.cos(math.radians(-PlayerR))*-5
-        PlayerY += math.sin(math.radians(-PlayerR))*-5
+        PlayerX += math.cos(math.radians(-PlayerR))*-7
+        PlayerY += math.sin(math.radians(-PlayerR))*-7
     if keys[pygame.K_a]:
         PlayerR = PlayerR +3
     if keys[pygame.K_d]:
