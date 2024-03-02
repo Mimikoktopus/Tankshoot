@@ -99,7 +99,7 @@ while spielaktiv:
             Win = False
     else:
         if GameoverS == False:
-            if Punkte == 20:
+            if Punkte == 15:
                 pygame.mixer.Sound.play(WonS)
                 Win = True
             window.fill(GRAU)
