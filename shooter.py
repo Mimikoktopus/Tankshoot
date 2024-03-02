@@ -39,6 +39,7 @@ Wonp       = pygame.image.load("win.jpg")
 Schuss     = pygame.mixer.Sound("Schuss.mp3")
 TodG       = pygame.mixer.Sound("TodG.mp3")
 TodS       = pygame.mixer.Sound("TodS.mp3")
+WonS       = pygame.mixer.Sound("WonS.mp3")
 Music      = pygame.mixer.music.load("Music.mp3")
 
 pygame.mixer.music.play(-1)
@@ -76,8 +77,6 @@ GameoverS  = False
 Win        = False
 
 while spielaktiv:
-    if Punkte > 20:
-        Win = True
     
     if Win == True:
         for event in pygame.event.get():
@@ -100,6 +99,9 @@ while spielaktiv:
             Win = False
     else:
         if GameoverS == False:
+            if Punkte == 20:
+                pygame.mixer.Sound.play(WonS)
+                Win = True
             window.fill(GRAU)
             MausP = pygame.mouse.get_pos()
             window.blit(Hintergrund, pygame.Rect(0, 0, 32, 32))
