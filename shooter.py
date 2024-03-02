@@ -185,7 +185,6 @@ while spielaktiv:
         if PlayerY > infoObject.current_h -20 :
             PlayerY = infoObject.current_h-20
     else:
-        pygame.mixer.music.pause()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 spielaktiv = False
@@ -196,4 +195,6 @@ while spielaktiv:
         if keys[pygame.K_ESCAPE]:
             spielaktiv = False 
         if keys[pygame.K_RETURN]:
+            PlayerX = infoObject.current_w -50
+            PlayerY = infoObject.current_h -50
             GameoverS = False
