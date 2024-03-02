@@ -20,7 +20,8 @@ window     = pygame.display.set_mode((infoObject.current_w, infoObject.current_h
 PlayerX    = infoObject.current_w /2
 PlayerY    = infoObject.current_h /2
 PlayerR    = 0
-Level      = 0
+Level      = 1
+LevelF     = 5
 Punkte     = 0
 KugelX     = PlayerX
 KugelY     = PlayerY
@@ -93,15 +94,17 @@ while spielaktiv:
         if keys[pygame.K_ESCAPE]:
             spielaktiv = False 
         if keys[pygame.K_RETURN]:
-            Punkte = 0
+            #Punkte = 0
+            LevelF = Level*5
             Feinde = [[30, 30]]
             PlayerX = infoObject.current_w /2
             PlayerY = infoObject.current_h /2
             Win = False
     else:
         if GameoverS == False:
-            if Punkte == 5:
+            if LevelF <= 0:
                 pygame.mixer.Sound.play(WonS)
+                Level += 1
                 Win = True
             window.fill(GRAU)
             MausP = pygame.mouse.get_pos()
@@ -163,6 +166,7 @@ while spielaktiv:
                         Feindreturn()   # Feind Hitbox
                         Punkte += 1
                         pygame.mixer.Sound.play(TodG)
+                        LevelF -= 1
                         Kugelaktiv = False
             FeindXA = FeindX - PlayerX
             FeindYA = FeindY - PlayerY
@@ -221,7 +225,6 @@ while spielaktiv:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     spielaktiv = False
-            Punkte = 0
             MausP = pygame.mouse.get_pos()
             FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
             window.blit(Fadenkreuz, FadenkreuzP)
@@ -232,6 +235,8 @@ while spielaktiv:
             if keys[pygame.K_ESCAPE]:
                 spielaktiv = False 
             if keys[pygame.K_RETURN]:
+                Punkte = 0
+                LevelF = 5
                 Feinde = [[30, 30]]
                 PlayerX = infoObject.current_w /2
                 PlayerY = infoObject.current_h /2
