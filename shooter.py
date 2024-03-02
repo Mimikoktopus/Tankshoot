@@ -27,7 +27,7 @@ KugelX     = PlayerX
 KugelY     = PlayerY
 KugelXG    = 4
 KugelYG    = 4
-Feinde     = [[30, 30]]
+Feinde     = []
 
 #Bider, Sounds import
 Fadenkreuz = pygame.image.load("Fadenkreuz.png")
@@ -67,11 +67,14 @@ def Feindreturn():
         FeindX = infoObject.current_h +1000
         FeindY = random.randint(-1000,infoObject.current_h + 1000)
     Feinde.append([FeindX, FeindY])
+    if len(Feinde) < Level:
+        Feindreturn()
 
 clock = pygame.time.Clock()
 pygame.display.set_caption("Pong")
 66
 pygame.mouse.set_visible(0)
+Feindreturn()
 
 spielaktiv = True
 Kugelaktiv = False
@@ -94,12 +97,13 @@ while spielaktiv:
         if keys[pygame.K_ESCAPE]:
             spielaktiv = False 
         if keys[pygame.K_RETURN]:
-            #Punkte = 0
             LevelF = Level*5
-            Feinde = [[30, 30]]
+            Feinde = []
+            Feindreturn()
             PlayerX = infoObject.current_w /2
             PlayerY = infoObject.current_h /2
             Win = False
+            PlayerR = 0
     else:
         if GameoverS == False:
             if LevelF <= 0:
@@ -152,6 +156,12 @@ while spielaktiv:
                 FeindXG  = FeindXG * -5
                 Feind[0]   = FeindX + FeindXG
                 Feind[1]   = FeindY + FeindYG
+                FeindXA = FeindX - PlayerX
+                FeindYA = FeindY - PlayerY
+                FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
+                if FeindA < 80:
+                    pygame.mixer.Sound.play(TodS)
+                    GameoverS = True    # Player Hitbox
 
             if Kugelaktiv :
                 for i in range(len(Feinde)):
@@ -168,12 +178,6 @@ while spielaktiv:
                         pygame.mixer.Sound.play(TodG)
                         LevelF -= 1
                         Kugelaktiv = False
-            FeindXA = FeindX - PlayerX
-            FeindYA = FeindY - PlayerY
-            FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
-            if FeindA < 80:
-                pygame.mixer.Sound.play(TodS)
-                GameoverS = True    # Player Hitbox
             if KugelX < 0 :
                 Kugelaktiv = False
             if KugelY < 0 :
@@ -235,9 +239,11 @@ while spielaktiv:
             if keys[pygame.K_ESCAPE]:
                 spielaktiv = False 
             if keys[pygame.K_RETURN]:
-                Punkte = 0
-                LevelF = 5
-                Feinde = [[30, 30]]
-                PlayerX = infoObject.current_w /2
-                PlayerY = infoObject.current_h /2
+                Punkte    = 0
+                LevelF    = 5
+                Feinde    = []
+                Feindreturn()
+                PlayerX   = infoObject.current_w /2
+                PlayerY   = infoObject.current_h /2
                 GameoverS = False
+                PlayerR   = 0
