@@ -43,11 +43,12 @@ TodG       = pygame.mixer.Sound("TodG.mp3")
 TodS       = pygame.mixer.Sound("TodS.mp3")
 WonS       = pygame.mixer.Sound("WonS.mp3")
 Music      = pygame.mixer.music.load("Music.mp3")
+font       = pygame.font.SysFont(None, 50)
 
 pygame.mixer.music.play(-1)
-Hintergrund= pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
-Gameover   = pygame.transform.scale(Gameover,(infoObject.current_w, infoObject.current_h))
-Wonp       = pygame.transform.scale(Wonp,(infoObject.current_w, infoObject.current_h))
+Hintergrund = pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
+Gameover    = pygame.transform.scale(Gameover,(infoObject.current_w, infoObject.current_h))
+Wonp        = pygame.transform.scale(Wonp,(infoObject.current_w, infoObject.current_h))
 
 
 #Funktions Blog
@@ -139,6 +140,8 @@ while spielaktiv:
             window.blit(Fadenkreuz, FadenkreuzP)
             #rect = pygame.Rect(infoObject.current_w /4, infoObject.current_h /4, infoObject.current_w /2, 50)
             #pygame.draw.rect(window, (SCHWARZ), rect)
+            SpielerAText = font.render("Punkte : " + str(Punkte), True, pygame.Color('white'))
+            window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
             pygame.display.flip()
             clock.tick(60)
 
