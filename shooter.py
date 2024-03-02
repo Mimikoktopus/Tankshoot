@@ -20,6 +20,7 @@ window     = pygame.display.set_mode((infoObject.current_w, infoObject.current_h
 PlayerX    = infoObject.current_w /2
 PlayerY    = infoObject.current_h /2
 PlayerR    = 0
+Level      = 0
 Punkte     = 0
 KugelX     = PlayerX
 KugelY     = PlayerY
@@ -99,7 +100,7 @@ while spielaktiv:
             Win = False
     else:
         if GameoverS == False:
-            if Punkte == 15:
+            if Punkte == 5:
                 pygame.mixer.Sound.play(WonS)
                 Win = True
             window.fill(GRAU)
