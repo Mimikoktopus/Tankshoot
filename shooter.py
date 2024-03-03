@@ -95,7 +95,7 @@ while spielaktiv:
         if Punkte > Highscore :
             Highscore = Punkte
         SpielerAText = font.render("Highscore : " + str(Highscore), True, pygame.Color('white'))
-        window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h/2 -SpielerAText.get_height()/2))
+        window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h-100 -SpielerAText.get_height()/2))
         pygame.display.flip()
         clock.tick(60)
         window.blit(Wonp, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
