@@ -115,6 +115,7 @@ while spielaktiv:
             PlayerY = infoObject.current_h /2
             Win = False
             PlayerR = 0
+            Leben   = 100
     else:
         if GameoverS == False:
             if LevelF <= 0:
@@ -156,7 +157,7 @@ while spielaktiv:
             window.blit(SpielerAText, (30 , 30))
             rect = pygame.Rect(infoObject.current_w /2 - 200, 30, Leben*4, 30)
             pygame.draw.rect(window, (ROT), rect)
-            SpielerAText = font.render("Health", True, pygame.Color('white'))
+            SpielerAText = font.render("Health: "+ str(Leben), True, pygame.Color('white'))
             window.blit(SpielerAText, (infoObject.current_h -SpielerAText.get_width() , 30))
             pygame.display.flip()
             clock.tick(60)
