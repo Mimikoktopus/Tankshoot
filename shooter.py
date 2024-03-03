@@ -28,6 +28,7 @@ KugelY     = PlayerY
 KugelXG    = 4
 KugelYG    = 4
 Highscore  = 0
+Leben      = 100
 Feinde     = []
 
 #Bider, Sounds import
@@ -153,6 +154,8 @@ while spielaktiv:
             window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
             SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
             window.blit(SpielerAText, (30 , 30))
+            rect = pygame.Rect(infoObject.current_w /2 - 200, 30, Leben*4, 30)
+            pygame.draw.rect(window, (ROT), rect)
             pygame.display.flip()
             clock.tick(60)
 
@@ -174,8 +177,10 @@ while spielaktiv:
                 FeindYA = FeindY - PlayerY
                 FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
                 if FeindA < 80:
+                    Leben   -= 1      # Player Hitbox
+                if Leben <= 0:
+                    GameoverS = True    
                     pygame.mixer.Sound.play(TodS)
-                    GameoverS = True    # Player Hitbox
 
             if Kugelaktiv :
                 for i in range(len(Feinde)):
@@ -257,6 +262,7 @@ while spielaktiv:
             pygame.display.flip()
             clock.tick(60)
             window.blit(Gameover, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
+            Leben = 100
             keys  = pygame.key.get_pressed()
             if keys[pygame.K_ESCAPE]:
                 spielaktiv = False 
