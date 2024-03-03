@@ -95,7 +95,7 @@ while spielaktiv:
         window.blit(Fadenkreuz, FadenkreuzP)
         if Punkte > Highscore :
             Highscore = Punkte
-        SpielerAText = font.render("Punkte : " + str(Punkte), True, pygame.Color('white'))
+        SpielerAText = font.render("Kills : " + str(Punkte), True, pygame.Color('white'))
         window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
         SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
         window.blit(SpielerAText, (30 , 30))
@@ -150,12 +150,14 @@ while spielaktiv:
             window.blit(Fadenkreuz, FadenkreuzP)
             #rect = pygame.Rect(infoObject.current_w /4, infoObject.current_h /4, infoObject.current_w /2, 50)
             #pygame.draw.rect(window, (SCHWARZ), rect)
-            SpielerAText = font.render("Punkte : " + str(Punkte), True, pygame.Color('white'))
+            SpielerAText = font.render("Kills : " + str(Punkte), True, pygame.Color('white'))
             window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
             SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
             window.blit(SpielerAText, (30 , 30))
             rect = pygame.Rect(infoObject.current_w /2 - 200, 30, Leben*4, 30)
             pygame.draw.rect(window, (ROT), rect)
+            SpielerAText = font.render("Health", True, pygame.Color('white'))
+            window.blit(SpielerAText, (infoObject.current_h -SpielerAText.get_width() , 30))
             pygame.display.flip()
             clock.tick(60)
 
@@ -253,7 +255,7 @@ while spielaktiv:
             window.blit(Fadenkreuz, FadenkreuzP)
             if Punkte > Highscore :
                 Highscore = Punkte
-            SpielerAText = font.render("Punkte : " + str(Punkte), True, pygame.Color('white'))
+            SpielerAText = font.render("Kills : " + str(Punkte), True, pygame.Color('white'))
             window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
             SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
             window.blit(SpielerAText, (30 , 30))
