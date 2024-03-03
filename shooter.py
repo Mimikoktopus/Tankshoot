@@ -142,6 +142,8 @@ while spielaktiv:
             #pygame.draw.rect(window, (SCHWARZ), rect)
             SpielerAText = font.render("Punkte : " + str(Punkte), True, pygame.Color('white'))
             window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
+            SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
+            window.blit(SpielerAText, (30 , 30))
             pygame.display.flip()
             clock.tick(60)
 
@@ -244,6 +246,7 @@ while spielaktiv:
             if keys[pygame.K_RETURN]:
                 Punkte    = 0
                 LevelF    = 5
+                Level     = 1
                 Feinde    = []
                 Feindreturn()
                 PlayerX   = infoObject.current_w /2
