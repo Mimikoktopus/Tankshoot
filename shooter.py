@@ -27,6 +27,7 @@ KugelX     = PlayerX
 KugelY     = PlayerY
 KugelXG    = 4
 KugelYG    = 4
+Highscore  = 0
 Feinde     = []
 
 #Bider, Sounds import
@@ -91,6 +92,10 @@ while spielaktiv:
         MausP = pygame.mouse.get_pos()
         FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
         window.blit(Fadenkreuz, FadenkreuzP)
+        if Punkte > Highscore :
+            Highscore = Punkte
+        SpielerAText = font.render("Highscore : " + str(Highscore), True, pygame.Color('white'))
+        window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h/2 -SpielerAText.get_height()/2))
         pygame.display.flip()
         clock.tick(60)
         window.blit(Wonp, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
@@ -237,6 +242,10 @@ while spielaktiv:
             MausP = pygame.mouse.get_pos()
             FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
             window.blit(Fadenkreuz, FadenkreuzP)
+            if Punkte > Highscore :
+                Highscore = Punkte
+            SpielerAText = font.render("Highscore : " + str(Highscore), True, pygame.Color('white'))
+            window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h/2 -SpielerAText.get_height()/2))
             pygame.display.flip()
             clock.tick(60)
             window.blit(Gameover, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
