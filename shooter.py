@@ -151,7 +151,7 @@ while spielaktiv:
                         Start = False
             if mouse[0] and MausP[0] > infoObject.current_w/2 - 145:
                 if MausP[0] < infoObject.current_w/2 + 145:
-                    if MausP[1] > infoObject.current_h/4*3 and MausP[1] < infoObject.current_h/2 +130:
+                    if MausP[1] > infoObject.current_h/4*3 and MausP[1] < infoObject.current_h/4*3 +130:
                         Skin = True            
         else:
             if Esc == True:
@@ -187,7 +187,7 @@ while spielaktiv:
                             Esc = False
                 if mouse[0] and MausP[0] > infoObject.current_w/2 - 145:
                     if MausP[0] < infoObject.current_w/2 + 145:
-                        if MausP[1] > infoObject.current_h/4*3 and MausP[1] < infoObject.current_h/2 +130:
+                        if MausP[1] > infoObject.current_h/4*3 and MausP[1] < infoObject.current_h/4*3 +130:
                             Skin = True
 
             else:
