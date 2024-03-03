@@ -32,26 +32,26 @@ Leben      = 100
 Feinde     = []
 
 #Bider, Sounds import
-Fadenkreuz = pygame.image.load("Fadenkreuz.png")
-Hintergrund= pygame.image.load("Hintergrund.jpg")
-Soldat     = pygame.image.load("Panzer.png")
-Gameover   = pygame.image.load("Gameover.jpg")
-FeindB     = pygame.image.load("Feind.png")
-Panzer     = pygame.image.load("PanzerUntersatz.png")
-PanzerK    = pygame.image.load("PanzerKanonenturm.png")
-Wonp       = pygame.image.load("win.jpg")
-Schuss     = pygame.mixer.Sound("Schuss.mp3")
-TodG       = pygame.mixer.Sound("TodG.mp3")
-TodS       = pygame.mixer.Sound("TodS.mp3")
-WonS       = pygame.mixer.Sound("WonS.mp3")
-Music      = pygame.mixer.music.load("Music.mp3")
-font       = pygame.font.SysFont(None, 50)
+Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
+Hintergrund = pygame.image.load("Hintergrund.jpg")
+Soldat      = pygame.image.load("Panzer.png")
+Gameover    = pygame.image.load("Gameover.jpg")
+FeindB      = pygame.image.load("Feind.png")
+Panzer      = pygame.image.load("PanzerUntersatz.png")
+PanzerK     = pygame.image.load("PanzerKanonenturm.png")
+Schliessen  = pygame.image.load("Quit.png")
+Wonp        = pygame.image.load("win.jpg")
+Schuss      = pygame.mixer.Sound("Schuss.mp3")
+TodG        = pygame.mixer.Sound("TodG.mp3")
+TodS        = pygame.mixer.Sound("TodS.mp3")
+WonS        = pygame.mixer.Sound("WonS.mp3")
+Music       = pygame.mixer.music.load("Music.mp3")
+font        = pygame.font.SysFont(None, 50)
 
 pygame.mixer.music.play(-1)
 Hintergrund = pygame.transform.scale(Hintergrund,(infoObject.current_w, infoObject.current_h))
 Gameover    = pygame.transform.scale(Gameover,(infoObject.current_w, infoObject.current_h))
 Wonp        = pygame.transform.scale(Wonp,(infoObject.current_w, infoObject.current_h))
-
 
 #Funktions Blog
 def Feindreturn():
@@ -99,11 +99,10 @@ while spielaktiv:
         window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
         SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
         window.blit(SpielerAText, (30 , 30))
-        SpielerAText = font.render("Highscore : " + str(Highscore), True, pygame.Color('white'))
-        window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h-100 -SpielerAText.get_height()/2))
+        window.blit(Schliessen, (infoObject.current_w/2 -232, infoObject.current_h/4 ))
         pygame.display.flip()
         clock.tick(60)
-        window.blit(Wonp, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
+        window.blit(Hintergrund, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
         keys  = pygame.key.get_pressed()
 
     else:
@@ -120,14 +119,12 @@ while spielaktiv:
             window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
             SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
             window.blit(SpielerAText, (30 , 30))
-            SpielerAText = font.render("Highscore : " + str(Highscore), True, pygame.Color('white'))
-            window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h-100 -SpielerAText.get_height()/2))
             pygame.display.flip()
             clock.tick(60)
             window.blit(Wonp, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
             keys  = pygame.key.get_pressed()
             if keys[pygame.K_ESCAPE]:
-                spielaktiv = False 
+                Esc = True 
             if keys[pygame.K_RETURN]:
                 LevelF = Level*5
                 Feinde = []
@@ -157,7 +154,7 @@ while spielaktiv:
                 Px = MausP[0] - PlayerX
                 Py = MausP[1] - PlayerY
                 Soldatw2 = math.degrees (math.atan2 (-Py,Px))
-                Soldatw =pygame.transform.rotate(PanzerK, Soldatw2)
+                Soldatw  = pygame.transform.rotate(PanzerK, Soldatw2)
                 window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
                 
                 for Feind in Feinde:
@@ -245,7 +242,7 @@ while spielaktiv:
                 if keys[pygame.K_d]:
                     PlayerR = PlayerR -3
                 if keys[pygame.K_ESCAPE]:
-                    spielaktiv = False
+                    Esc = True
                 if mouse[0] and (not Kugelaktiv):
                     Kugelaktiv = True
                     pygame.mixer.Sound.play(Schuss)
@@ -289,7 +286,7 @@ while spielaktiv:
                 Leben = 100
                 keys  = pygame.key.get_pressed()
                 if keys[pygame.K_ESCAPE]:
-                    spielaktiv = False 
+                    Esc       = True 
                 if keys[pygame.K_RETURN]:
                     Punkte    = 0
                     LevelF    = 5
