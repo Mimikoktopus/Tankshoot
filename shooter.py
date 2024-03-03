@@ -29,6 +29,7 @@ KugelXG    = 4
 KugelYG    = 4
 Highscore  = 0
 Leben      = 100
+Waehrung    = 0
 Feinde     = []
 
 #Bider, Sounds import
@@ -42,6 +43,7 @@ PanzerK     = pygame.image.load("PanzerKanonenturm.png")
 Schliessen  = pygame.image.load("Quit.png")
 Back        = pygame.image.load("Back.png")
 Startb      = pygame.image.load("Start.png")
+Skinn       = pygame.image.load("Skins.png")
 Wonp        = pygame.image.load("win.jpg")
 Schuss      = pygame.mixer.Sound("Schuss.mp3")
 TodG        = pygame.mixer.Sound("TodG.mp3")
@@ -104,6 +106,8 @@ while spielaktiv:
         window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
         SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
         window.blit(SpielerAText, (30 , 30))
+        SpielerAText = font.render("Coins : " + str(Waehrung), True, pygame.Color('white'))
+        window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width() , 60))
         pygame.display.flip()
         clock.tick(60)
         window.blit(Hintergrund, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
@@ -135,6 +139,8 @@ while spielaktiv:
             window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
             SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
             window.blit(SpielerAText, (30 , 30))
+            SpielerAText = font.render("Coins : " + str(Waehrung), True, pygame.Color('white'))
+            window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width() , 60))
             pygame.display.flip()
             clock.tick(60)
             window.blit(Hintergrund, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
@@ -163,6 +169,8 @@ while spielaktiv:
                 window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
                 SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
                 window.blit(SpielerAText, (30 , 30))
+                SpielerAText = font.render("Coins : " + str(Waehrung), True, pygame.Color('white'))
+                window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width() , 60))
                 pygame.display.flip()
                 clock.tick(60)
                 window.blit(Wonp, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
@@ -217,6 +225,8 @@ while spielaktiv:
                     window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
                     SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
                     window.blit(SpielerAText, (30 , 30))
+                    SpielerAText = font.render("Coins : " + str(Waehrung), True, pygame.Color('white'))
+                    window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width() , 60))
                     rect = pygame.Rect(infoObject.current_w /2 - 200, 30, Leben*4, 30)
                     pygame.draw.rect(window, (ROT), rect)
                     SpielerAText = font.render("Health: "+ str(Leben), True, pygame.Color('white'))
@@ -261,6 +271,7 @@ while spielaktiv:
                                 Punkte += 1
                                 pygame.mixer.Sound.play(TodG)
                                 LevelF -= 1
+                                Waehrung += 1
                                 Kugelaktiv = False
                     if KugelX < 0 :
                         Kugelaktiv = False
@@ -322,6 +333,8 @@ while spielaktiv:
                     window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
                     SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
                     window.blit(SpielerAText, (30 , 30))
+                    SpielerAText = font.render("Coins : " + str(Waehrung), True, pygame.Color('white'))
+                    window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width() , 60))
                     SpielerAText = font.render("Highscore : " + str(Highscore), True, pygame.Color('white'))
                     window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h/2 -SpielerAText.get_height()/2))
                     pygame.display.flip()
