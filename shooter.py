@@ -31,8 +31,8 @@ Highscore  = 0
 Leben      = 100
 Waehrung   = 0
 Feinde     = []
-Skina      = 1
-SkinaK     = 1
+Skinan      = 1
+SkinanK     = 1
 
 #Bider, Sounds import
 Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
@@ -96,6 +96,15 @@ Start      = True
 Skin       = False
 
 while spielaktiv:
+    if Skinan == 1:
+        Skina = Panzer1
+    if SkinanK == 1:
+        SkinaK = PanzerK1
+    if Skinan == 2:
+        Skina = Back
+    if SkinanK == 2:
+        SkinaK = Back
+    
     if Skin == True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -123,6 +132,11 @@ while spielaktiv:
             if MausP[0] < 30 + 330:
                 if MausP[1] > 80 and MausP[1] < 80 +150:
                     Skin = False
+        if mouse[0] and MausP[0] > 100 :
+            if MausP[0] < 100 + 200:
+                if MausP[1] > infoObject.current_h/2 +199 +30 and MausP[1] < infoObject.current_h/2 +199 +230:
+                    Skinan  = 1
+                    SkinanK = 1
     else:
         if Start == True:
             for event in pygame.event.get():
