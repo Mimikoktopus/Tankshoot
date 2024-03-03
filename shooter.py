@@ -38,12 +38,13 @@ Hintergrund = pygame.image.load("Hintergrund.jpg")
 Soldat      = pygame.image.load("Panzer.png")
 Gameover    = pygame.image.load("Gameover.jpg")
 FeindB      = pygame.image.load("Feind.png")
-Panzer      = pygame.image.load("PanzerUntersatz.png")
-PanzerK     = pygame.image.load("PanzerKanonenturm.png")
+Panzer1     = pygame.image.load("PanzerUntersatz.png")
+PanzerK1    = pygame.image.load("PanzerKanonenturm.png")
 Schliessen  = pygame.image.load("Quit.png")
 Back        = pygame.image.load("Back.png")
 Startb      = pygame.image.load("Start.png")
-Skinb      = pygame.image.load("Skins.png")
+Skinb       = pygame.image.load("Skins.png")
+Skin1       = pygame.image.load("T72Skin.png")
 Wonp        = pygame.image.load("win.jpg")
 Schuss      = pygame.mixer.Sound("Schuss.mp3")
 TodG        = pygame.mixer.Sound("TodG.mp3")
@@ -96,7 +97,8 @@ while spielaktiv:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 spielaktiv = False
-        window.blit(Back, (infoObject.current_w/2 -145, infoObject.current_h/2 ))
+        window.blit(Back, (30, 80))
+        window.blit(Skin1, (60, infoObject.current_h/2))
         MausP = pygame.mouse.get_pos()
         FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
         window.blit(Fadenkreuz, FadenkreuzP)
@@ -113,9 +115,9 @@ while spielaktiv:
         window.blit(Hintergrund, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
         keys  = pygame.key.get_pressed()
         mouse = pygame.mouse.get_pressed()
-        if mouse[0] and MausP[0] > infoObject.current_w/2 - 165:
-            if MausP[0] < infoObject.current_w/2 + 165:
-                if MausP[1] > infoObject.current_h/2 and MausP[1] < infoObject.current_h/2 +150:
+        if mouse[0] and MausP[0] > 30 :
+            if MausP[0] < 30 + 330:
+                if MausP[1] > 80 and MausP[1] < 80 +150:
                     Skin = False
     else:
         if Start == True:
@@ -235,13 +237,13 @@ while spielaktiv:
                             KugelX  = KugelX + KugelXG
                             KugelY  = KugelY + KugelYG
                         
-                        Soldatw =pygame.transform.rotate(Panzer, PlayerR)
+                        Soldatw =pygame.transform.rotate(Panzer1, PlayerR)
                         window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
                         
                         Px = MausP[0] - PlayerX
                         Py = MausP[1] - PlayerY
                         Soldatw2 = math.degrees (math.atan2 (-Py,Px))
-                        Soldatw  = pygame.transform.rotate(PanzerK, Soldatw2)
+                        Soldatw  = pygame.transform.rotate(PanzerK1, Soldatw2)
                         window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
                         
                         for Feind in Feinde:
