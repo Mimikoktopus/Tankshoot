@@ -31,8 +31,8 @@ Highscore  = 0
 Leben      = 100
 Waehrung   = 0
 Feinde     = []
-Skinan      = 2
-SkinanK     = 2
+Skinan     = 1
+SkinanK    = 1
 
 #Bider, Sounds import
 Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
