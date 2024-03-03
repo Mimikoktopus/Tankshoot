@@ -94,6 +94,10 @@ while spielaktiv:
         window.blit(Fadenkreuz, FadenkreuzP)
         if Punkte > Highscore :
             Highscore = Punkte
+        SpielerAText = font.render("Punkte : " + str(Punkte), True, pygame.Color('white'))
+        window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
+        SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
+        window.blit(SpielerAText, (30 , 30))
         SpielerAText = font.render("Highscore : " + str(Highscore), True, pygame.Color('white'))
         window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h-100 -SpielerAText.get_height()/2))
         pygame.display.flip()
@@ -244,6 +248,10 @@ while spielaktiv:
             window.blit(Fadenkreuz, FadenkreuzP)
             if Punkte > Highscore :
                 Highscore = Punkte
+            SpielerAText = font.render("Punkte : " + str(Punkte), True, pygame.Color('white'))
+            window.blit(SpielerAText, (infoObject.current_w -30 -SpielerAText.get_width(), 30))
+            SpielerAText = font.render("Level : " + str(Level), True, pygame.Color('white'))
+            window.blit(SpielerAText, (30 , 30))
             SpielerAText = font.render("Highscore : " + str(Highscore), True, pygame.Color('white'))
             window.blit(SpielerAText, (infoObject.current_w /2 -SpielerAText.get_width()/2, infoObject.current_h/2 -SpielerAText.get_height()/2))
             pygame.display.flip()
