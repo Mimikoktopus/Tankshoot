@@ -31,8 +31,8 @@ Highscore  = 0
 Leben      = 100
 Waehrung   = 0
 Feinde     = []
-Skinan      = 1
-SkinanK     = 1
+Skinan      = 2
+SkinanK     = 2
 
 #Bider, Sounds import
 Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
@@ -42,12 +42,15 @@ Gameover    = pygame.image.load("Gameover.jpg")
 FeindB      = pygame.image.load("Feind.png")
 Panzer1     = pygame.image.load("PanzerUntersatz.png")
 PanzerK1    = pygame.image.load("PanzerKanonenturm.png")
+Panzer2     = pygame.image.load("Panzer2.png")
+PanzerK2    = pygame.image.load("Panzer2K.png")
 Schliessen  = pygame.image.load("Quit.png")
 Back        = pygame.image.load("Back.png")
 Equip       = pygame.image.load("Equip.png")
 Startb      = pygame.image.load("Start.png")
 Skinb       = pygame.image.load("Skins.png")
 Skin1       = pygame.image.load("T72Skin.png")
+Skin2       = pygame.image.load("Panzer2Skin.png")
 Wonp        = pygame.image.load("win.jpg")
 Schuss      = pygame.mixer.Sound("Schuss.mp3")
 TodG        = pygame.mixer.Sound("TodG.mp3")
@@ -101,9 +104,9 @@ while spielaktiv:
     if SkinanK == 1:
         SkinaK = PanzerK1
     if Skinan == 2:
-        Skina = Back
+        Skina = Panzer2
     if SkinanK == 2:
-        SkinaK = Back
+        SkinaK = PanzerK2
     
     if Skin == True:
         for event in pygame.event.get():
@@ -112,6 +115,8 @@ while spielaktiv:
         window.blit(Back, (30, 80))
         window.blit(Equip, (100, infoObject.current_h/2 +199 +30))
         window.blit(Skin1, (60, infoObject.current_h/2))
+        window.blit(Equip, (100 +411 +100, infoObject.current_h/2 +199 +40))
+        window.blit(Skin2, (60 +411 +60, infoObject.current_h/2))
         MausP = pygame.mouse.get_pos()
         FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
         window.blit(Fadenkreuz, FadenkreuzP)
@@ -137,6 +142,11 @@ while spielaktiv:
                 if MausP[1] > infoObject.current_h/2 +199 +30 and MausP[1] < infoObject.current_h/2 +199 +230:
                     Skinan  = 1
                     SkinanK = 1
+        if mouse[0] and MausP[0] > 200+411 :
+            if MausP[0] < 611 + 200:
+                if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
+                    Skinan  = 2
+                    SkinanK = 2
     else:
         if Start == True:
             for event in pygame.event.get():
