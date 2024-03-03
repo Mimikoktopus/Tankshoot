@@ -29,8 +29,10 @@ KugelXG    = 4
 KugelYG    = 4
 Highscore  = 0
 Leben      = 100
-Waehrung    = 0
+Waehrung   = 0
 Feinde     = []
+Skina      = 1
+SkinaK     = 1
 
 #Bider, Sounds import
 Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
@@ -42,6 +44,7 @@ Panzer1     = pygame.image.load("PanzerUntersatz.png")
 PanzerK1    = pygame.image.load("PanzerKanonenturm.png")
 Schliessen  = pygame.image.load("Quit.png")
 Back        = pygame.image.load("Back.png")
+Equip       = pygame.image.load("Equip.png")
 Startb      = pygame.image.load("Start.png")
 Skinb       = pygame.image.load("Skins.png")
 Skin1       = pygame.image.load("T72Skin.png")
@@ -98,6 +101,7 @@ while spielaktiv:
             if event.type == pygame.QUIT:
                 spielaktiv = False
         window.blit(Back, (30, 80))
+        window.blit(Equip, (100, infoObject.current_h/2 +199 +30))
         window.blit(Skin1, (60, infoObject.current_h/2))
         MausP = pygame.mouse.get_pos()
         FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
@@ -237,13 +241,13 @@ while spielaktiv:
                             KugelX  = KugelX + KugelXG
                             KugelY  = KugelY + KugelYG
                         
-                        Soldatw =pygame.transform.rotate(Panzer1, PlayerR)
+                        Soldatw =pygame.transform.rotate(Skina, PlayerR)
                         window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
                         
                         Px = MausP[0] - PlayerX
                         Py = MausP[1] - PlayerY
                         Soldatw2 = math.degrees (math.atan2 (-Py,Px))
-                        Soldatw  = pygame.transform.rotate(PanzerK1, Soldatw2)
+                        Soldatw  = pygame.transform.rotate(SkinaK, Soldatw2)
                         window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
                         
                         for Feind in Feinde:
