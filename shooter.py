@@ -33,6 +33,8 @@ Waehrung   = 0
 Feinde     = []
 Skinan     = 1
 SkinanK    = 1
+Equipv     = 0
+Equipv2    = 0
 
 #Bider, Sounds import
 Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
@@ -46,7 +48,9 @@ Panzer2     = pygame.image.load("Panzer2.png")
 PanzerK2    = pygame.image.load("Panzer2K.png")
 Schliessen  = pygame.image.load("Quit.png")
 Back        = pygame.image.load("Back.png")
+Buy1        = pygame.image.load("Buy1.png")
 Equip       = pygame.image.load("Equip.png")
+Equiped     = pygame.image.load("Equiped.png")
 Startb      = pygame.image.load("Start.png")
 Skinb       = pygame.image.load("Skins.png")
 Skin1       = pygame.image.load("T72Skin.png")
@@ -97,14 +101,21 @@ Win        = False
 Esc        = False
 Start      = True
 Skin       = False
+Skin2A     = False
 
 while spielaktiv:
     if Skinan == 1:
-        Skina = Panzer1
+        Skina   = Panzer1
+        Equipv  = Equiped
+        Equipv2 = Equip
+        SkinG   = 10
     if SkinanK == 1:
         SkinaK = PanzerK1
     if Skinan == 2:
-        Skina = Panzer2
+        Skina   = Panzer2
+        Equipv2 = Equiped
+        Equipv  = Equip
+        SkinG   = 20
     if SkinanK == 2:
         SkinaK = PanzerK2
     
@@ -113,9 +124,12 @@ while spielaktiv:
             if event.type == pygame.QUIT:
                 spielaktiv = False
         window.blit(Back, (30, 80))
-        window.blit(Equip, (100, infoObject.current_h/2 +199 +30))
+        window.blit(Equipv, (100, infoObject.current_h/2 +199 +30))
         window.blit(Skin1, (60, infoObject.current_h/2))
-        window.blit(Equip, (100 +411 +100, infoObject.current_h/2 +199 +40))
+        if Skin2A == False:
+            window.blit(Buy1, (100 +411 +100, infoObject.current_h/2 +199 +40))
+        else:
+            window.blit(Equipv2, (100 +411 +100, infoObject.current_h/2 +199 +40))
         window.blit(Skin2, (60 +411 +60, infoObject.current_h/2))
         MausP = pygame.mouse.get_pos()
         FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
@@ -142,11 +156,21 @@ while spielaktiv:
                 if MausP[1] > infoObject.current_h/2 +199 +30 and MausP[1] < infoObject.current_h/2 +199 +230:
                     Skinan  = 1
                     SkinanK = 1
-        if mouse[0] and MausP[0] > 200+411 :
-            if MausP[0] < 611 + 200:
-                if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
-                    Skinan  = 2
-                    SkinanK = 2
+                    Leben   = 150
+
+        if Skin2A == False:
+            if Waehrung >= 20:
+                if mouse[0] and MausP[0] > 200+411 :
+                    if MausP[0] < 611 + 127:
+                        if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
+                            Skin2A = True
+
+        else:
+            if mouse[0] and MausP[0] > 200+411 :
+                if MausP[0] < 611 + 200:
+                    if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
+                        Skinan  = 2
+                        SkinanK = 2
     else:
         if Start == True:
             for event in pygame.event.get():
@@ -307,8 +331,8 @@ while spielaktiv:
                             divisor = abs(FeindXG)
                             if abs(FeindYG) > divisor:
                                 divisor = abs(FeindYG)
-                            FeindYG  = FeindYG/divisor
-                            FeindXG  = FeindXG/divisor  
+                            FeindYG  = FeindYG / divisor
+                            FeindXG  = FeindXG / divisor  
                             FeindYG  = FeindYG * -5
                             FeindXG  = FeindXG * -5
                             Feind[0]   = FeindX + FeindXG
@@ -375,8 +399,8 @@ while spielaktiv:
                                 divisor = abs(KugelYG)
                             KugelYG = KugelYG/divisor
                             KugelXG = KugelXG/divisor  
-                            KugelYG = KugelYG * 10
-                            KugelXG = KugelXG * 10 
+                            KugelYG = KugelYG * SkinG
+                            KugelXG = KugelXG * SkinG 
                         if PlayerX < 20 :
                             PlayerX = 20
                         if PlayerY < 20 :
