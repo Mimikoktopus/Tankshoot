@@ -52,6 +52,7 @@ PanzerK3    = pygame.image.load("Panzer3K.png")
 Schliessen  = pygame.image.load("Quit.png")
 Back        = pygame.image.load("Back.png")
 Buy1        = pygame.image.load("Buy1.png")
+Buy2        = pygame.image.load("Buy2.png")
 Equip       = pygame.image.load("Equip.png")
 Equiped     = pygame.image.load("Equiped.png")
 Startb      = pygame.image.load("Start.png")
@@ -142,7 +143,7 @@ while spielaktiv:
         window.blit(Equipv, (100, infoObject.current_h/2 +199 +30))
         window.blit(Skin1, (60, infoObject.current_h/2))
         window.blit(Skin2, (60 +411 +60, infoObject.current_h/2))
-        window.blit(Skin3, (60 +411 +293 +60, infoObject.current_h/2))
+        window.blit(Skin3, (60 +411 +411 +80, infoObject.current_h/2))
         if Skin2A == False:
             window.blit(Buy1, (100 +411 +100, infoObject.current_h/2 +199 +40))
         else:
@@ -173,6 +174,20 @@ while spielaktiv:
                     Skinan  = 1
                     SkinanK = 1
 
+        if Skin3A == False:
+            if Waehrung >= 40:
+                if mouse[0] and MausP[0] > 200+411 :
+                    if MausP[0] < 611 + 127:
+                        if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
+                            Skin2A = True
+                            Waehrung -= 20
+
+        else:
+            if mouse[0] and MausP[0] > 200+411 :
+                if MausP[0] < 611 + 200:
+                    if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
+                        Skinan  = 2
+                        SkinanK = 2
         if Skin2A == False:
             if Waehrung >= 20:
                 if mouse[0] and MausP[0] > 200+411 :
