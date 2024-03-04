@@ -156,7 +156,6 @@ while spielaktiv:
                 if MausP[1] > infoObject.current_h/2 +199 +30 and MausP[1] < infoObject.current_h/2 +199 +230:
                     Skinan  = 1
                     SkinanK = 1
-                    Leben   = 150
 
         if Skin2A == False:
             if Waehrung >= 20:
@@ -164,6 +163,7 @@ while spielaktiv:
                     if MausP[0] < 611 + 127:
                         if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
                             Skin2A = True
+                            Waehrung -= 20
 
         else:
             if mouse[0] and MausP[0] > 200+411 :
@@ -274,7 +274,10 @@ while spielaktiv:
                         PlayerY = infoObject.current_h /2
                         Win = False
                         PlayerR = 0
-                        Leben   = 100
+                        if Skinan == 1:
+                            Leben = 100
+                        else:
+                            Leben = 150
                 else:
                     if GameoverS == False:
                         if LevelF <= 0:
@@ -429,7 +432,6 @@ while spielaktiv:
                         pygame.display.flip()
                         clock.tick(60)
                         window.blit(Gameover, pygame.Rect(0, 0, infoObject.current_h, infoObject.current_w))
-                        Leben = 100
                         keys  = pygame.key.get_pressed()
                         if keys[pygame.K_ESCAPE]:
                             Esc       = True 
@@ -443,3 +445,7 @@ while spielaktiv:
                             PlayerY   = infoObject.current_h /2
                             GameoverS = False
                             PlayerR   = 0
+                            if Skinan == 1:
+                                Leben = 100
+                            else:
+                                Leben = 150
