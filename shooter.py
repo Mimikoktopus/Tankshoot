@@ -35,6 +35,7 @@ Skinan     = 1
 SkinanK    = 1
 Equipv     = 0
 Equipv2    = 0
+Equipv3    = 0
 
 #Bider, Sounds import
 Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
@@ -46,6 +47,8 @@ Panzer1     = pygame.image.load("PanzerUntersatz.png")
 PanzerK1    = pygame.image.load("PanzerKanonenturm.png")
 Panzer2     = pygame.image.load("Panzer2.png")
 PanzerK2    = pygame.image.load("Panzer2K.png")
+Panzer3     = pygame.image.load("Panzer3.png")
+PanzerK3    = pygame.image.load("Panzer3K.png")
 Schliessen  = pygame.image.load("Quit.png")
 Back        = pygame.image.load("Back.png")
 Buy1        = pygame.image.load("Buy1.png")
@@ -55,6 +58,7 @@ Startb      = pygame.image.load("Start.png")
 Skinb       = pygame.image.load("Skins.png")
 Skin1       = pygame.image.load("T72Skin.png")
 Skin2       = pygame.image.load("Panzer2Skin.png")
+Skin3       = pygame.image.load("Panzer3Skin.png")
 Wonp        = pygame.image.load("win.jpg")
 Schuss      = pygame.mixer.Sound("Schuss.mp3")
 TodG        = pygame.mixer.Sound("TodG.mp3")
@@ -102,12 +106,14 @@ Esc        = False
 Start      = True
 Skin       = False
 Skin2A     = False
+Skin3A     = False
 
 while spielaktiv:
     if Skinan == 1:
         Skina   = Panzer1
         Equipv  = Equiped
         Equipv2 = Equip
+        Equipv3 = Equip
         SkinG   = 10
     if SkinanK == 1:
         SkinaK = PanzerK1
@@ -115,9 +121,18 @@ while spielaktiv:
         Skina   = Panzer2
         Equipv2 = Equiped
         Equipv  = Equip
-        SkinG   = 20
+        Equipv3 = Equip
+        SkinG   = 15
     if SkinanK == 2:
         SkinaK = PanzerK2
+    if Skinan == 3:
+        Skina   = Panzer3
+        Equipv3 = Equiped
+        Equipv2 = Equip
+        Equipv  = Equip
+        SkinG   = 25
+    if SkinanK == 3:
+        SkinaK = PanzerK3
     
     if Skin == True:
         for event in pygame.event.get():
@@ -126,11 +141,12 @@ while spielaktiv:
         window.blit(Back, (30, 80))
         window.blit(Equipv, (100, infoObject.current_h/2 +199 +30))
         window.blit(Skin1, (60, infoObject.current_h/2))
+        window.blit(Skin2, (60 +411 +60, infoObject.current_h/2))
+        window.blit(Skin3, (60 +411 +293 +60, infoObject.current_h/2))
         if Skin2A == False:
             window.blit(Buy1, (100 +411 +100, infoObject.current_h/2 +199 +40))
         else:
             window.blit(Equipv2, (100 +411 +100, infoObject.current_h/2 +199 +40))
-        window.blit(Skin2, (60 +411 +60, infoObject.current_h/2))
         MausP = pygame.mouse.get_pos()
         FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
         window.blit(Fadenkreuz, FadenkreuzP)
