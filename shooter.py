@@ -29,7 +29,7 @@ KugelXG    = 4
 KugelYG    = 4
 Highscore  = 0
 Leben      = 100
-Waehrung   = 0
+Waehrung   = 60
 Feinde     = []
 Skinan     = 1
 SkinanK    = 1
@@ -116,6 +116,8 @@ while spielaktiv:
         Equipv2 = Equip
         Equipv3 = Equip
         SkinG   = 10
+        SkinGes = 8
+        SkinR   = 4
     if SkinanK == 1:
         SkinaK = PanzerK1
     if Skinan == 2:
@@ -123,7 +125,9 @@ while spielaktiv:
         Equipv2 = Equiped
         Equipv  = Equip
         Equipv3 = Equip
-        SkinG   = 15
+        SkinG   = 20
+        SkinGes = 8
+        SkinR   = 4
     if SkinanK == 2:
         SkinaK = PanzerK2
     if Skinan == 3:
@@ -131,7 +135,9 @@ while spielaktiv:
         Equipv3 = Equiped
         Equipv2 = Equip
         Equipv  = Equip
-        SkinG   = 25
+        SkinG   = 30
+        SkinGes = 12
+        SkinR   = 6
     if SkinanK == 3:
         SkinaK = PanzerK3
     
@@ -148,6 +154,10 @@ while spielaktiv:
             window.blit(Buy1, (100 +411 +100, infoObject.current_h/2 +199 +40))
         else:
             window.blit(Equipv2, (100 +411 +100, infoObject.current_h/2 +199 +40))
+        if Skin3A == False:
+            window.blit(Buy2, (100 +411 +411+100, infoObject.current_h/2 +199 +40))
+        else:
+            window.blit(Equipv3, (100 +411 +411+100, infoObject.current_h/2 +199 +40))
         MausP = pygame.mouse.get_pos()
         FadenkreuzP = pygame.Rect(MausP[0]-16, MausP[1]-16, 32, 32)
         window.blit(Fadenkreuz, FadenkreuzP)
@@ -174,20 +184,6 @@ while spielaktiv:
                     Skinan  = 1
                     SkinanK = 1
 
-        if Skin3A == False:
-            if Waehrung >= 40:
-                if mouse[0] and MausP[0] > 200+411 :
-                    if MausP[0] < 611 + 127:
-                        if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
-                            Skin2A = True
-                            Waehrung -= 20
-
-        else:
-            if mouse[0] and MausP[0] > 200+411 :
-                if MausP[0] < 611 + 200:
-                    if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
-                        Skinan  = 2
-                        SkinanK = 2
         if Skin2A == False:
             if Waehrung >= 20:
                 if mouse[0] and MausP[0] > 200+411 :
@@ -202,6 +198,20 @@ while spielaktiv:
                     if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
                         Skinan  = 2
                         SkinanK = 2
+        if Skin3A == False:
+            if Waehrung >= 40:
+                if mouse[0] and MausP[0] > 200+411+411 :
+                    if MausP[0] < 611 + 127+411:
+                        if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
+                            Skin3A = True
+                            Waehrung -= 40
+
+        else:
+            if mouse[0] and MausP[0] > 200+411+411 :
+                if MausP[0] < 611 + 200 +411:
+                    if MausP[1] > infoObject.current_h/2 +199 +40 and MausP[1] < infoObject.current_h/2 +199 +240:
+                        Skinan  = 3
+                        SkinanK = 3
     else:
         if Start == True:
             for event in pygame.event.get():
@@ -307,8 +317,10 @@ while spielaktiv:
                         PlayerR = 0
                         if Skinan == 1:
                             Leben = 100
-                        else:
+                        if Skinan == 2:
                             Leben = 150
+                        if Skinan == 3:
+                            Leben = 100
                 else:
                     if GameoverS == False:
                         if LevelF <= 0:
@@ -318,13 +330,13 @@ while spielaktiv:
                         window.fill(GRAU)
                         MausP = pygame.mouse.get_pos()
                         window.blit(Hintergrund, pygame.Rect(0, 0, 32, 32))
+                        
+                        Soldatw =pygame.transform.rotate(Skina, PlayerR)
+                        window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
                         if Kugelaktiv:
                             pygame.draw.circle(window, (ORANGE), (KugelX, KugelY), 5)
                             KugelX  = KugelX + KugelXG
                             KugelY  = KugelY + KugelYG
-                        
-                        Soldatw =pygame.transform.rotate(Skina, PlayerR)
-                        window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
                         
                         Px = MausP[0] - PlayerX
                         Py = MausP[1] - PlayerY
@@ -410,15 +422,15 @@ while spielaktiv:
                         keys  = pygame.key.get_pressed()
                         mouse = pygame.mouse.get_pressed()
                         if keys[pygame.K_w]:
-                            PlayerX += math.cos(math.radians(-PlayerR))*7
-                            PlayerY += math.sin(math.radians(-PlayerR))*7
+                            PlayerX += math.cos(math.radians(-PlayerR))*SkinGes
+                            PlayerY += math.sin(math.radians(-PlayerR))*SkinGes
                         if keys[pygame.K_s]:
-                            PlayerX += math.cos(math.radians(-PlayerR))*-7
-                            PlayerY += math.sin(math.radians(-PlayerR))*-7
+                            PlayerX += math.cos(math.radians(-PlayerR))*-SkinGes
+                            PlayerY += math.sin(math.radians(-PlayerR))*-SkinGes
                         if keys[pygame.K_a]:
-                            PlayerR = PlayerR +3
+                            PlayerR = PlayerR +SkinR
                         if keys[pygame.K_d]:
-                            PlayerR = PlayerR -3
+                            PlayerR = PlayerR -SkinR
                         if keys[pygame.K_ESCAPE]:
                             Esc = True
                         if mouse[0] and (not Kugelaktiv):
@@ -478,5 +490,7 @@ while spielaktiv:
                             PlayerR   = 0
                             if Skinan == 1:
                                 Leben = 100
-                            else:
+                            if Skinan ==2 :
                                 Leben = 150
+                            if Skinan == 3:
+                                Leben = 100
