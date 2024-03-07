@@ -29,13 +29,14 @@ KugelXG    = 4
 KugelYG    = 4
 Highscore  = 0
 Leben      = 100
-Waehrung   = 60
+Waehrung   = 0
 Feinde     = []
 Skinan     = 1
 SkinanK    = 1
 Equipv     = 0
 Equipv2    = 0
 Equipv3    = 0
+Feindh    = 2
 
 #Bider, Sounds import
 Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
@@ -126,7 +127,7 @@ while spielaktiv:
         Equipv  = Equip
         Equipv3 = Equip
         SkinG   = 20
-        SkinGes = 8
+        SkinGes = 5
         SkinR   = 4
     if SkinanK == 2:
         SkinaK = PanzerK2
@@ -401,13 +402,28 @@ while spielaktiv:
                                 FeindYA = FeindY - KugelY
                                 FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
                                 if FeindA < 35 :
-                                    del Feinde[i]
-                                    Feindreturn()   # Feind Hitbox
-                                    Punkte += 1
-                                    pygame.mixer.Sound.play(TodG)
-                                    LevelF -= 1
-                                    Waehrung += 1
-                                    Kugelaktiv = False
+                                    if Skinan == 2:
+                                        del Feinde[i]
+                                        Feindreturn()   # Feind Hitbox
+                                        Punkte += 1
+                                        pygame.mixer.Sound.play(TodG)
+                                        LevelF -= 1
+                                        Waehrung += 1
+                                        Kugelaktiv = False
+                                    else:
+                                        if Feindh <= 1:
+                                            del Feinde[i]
+                                            Feindreturn()   # Feind Hitbox
+                                            Punkte += 1
+                                            pygame.mixer.Sound.play(TodG)
+                                            LevelF -= 1
+                                            Waehrung += 1
+                                            Kugelaktiv = False
+                                            Feindh = 2
+                                        else:
+                                            Feindh -= 1
+                                            Kugelaktiv = False
+
                         if KugelX < 0 :
                             Kugelaktiv = False
                         if KugelY < 0 :
