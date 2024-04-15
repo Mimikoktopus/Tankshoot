@@ -9,11 +9,12 @@ os.chdir(pathlib.Path(__file__).parent.resolve())
 
 #Klassen
 class Player :
-    def __init__(self,x,y):
+    def __init__(self,x,y,Untersatz,Kanone):
         self.x = x
         self.y = y
         self.r = 0
-
+        self.Untersatz = Untersatz
+        self.Kanone = Kanone
 
 #Variablen Blog
 ORANGE     = ( 255, 140, 0)
@@ -35,7 +36,7 @@ KugelXG    = 4
 KugelYG    = 4
 Highscore  = 0
 Leben      = 100
-Waehrung   = 60
+Waehrung   = 0
 Feinde     = []
 Skinan     = 1
 SkinanK    = 1
