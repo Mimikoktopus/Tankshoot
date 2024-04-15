@@ -8,10 +8,11 @@ pygame.init()
 os.chdir(pathlib.Path(__file__).parent.resolve())
 
 #Klassen
-class player :
+class Player :
     def __init__(self,x,y):
         self.x = x
         self.y = y
+        self.r = 0
 
 
 #Variablen Blog
@@ -24,14 +25,12 @@ BLAU       = ( 0, 0, 255)
 GRAU       = ( 150, 150, 150)
 infoObject = pygame.display.Info()
 window     = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
-PlayerX    = infoObject.current_w /2
-PlayerY    = infoObject.current_h /2
-PlayerR    = 0
+Player1    = Player(infoObject.current_w /2,infoObject.current_h /2)
 Level      = 1
 LevelF     = 5
 Punkte     = 0
-KugelX     = PlayerX
-KugelY     = PlayerY
+KugelX     = Player1.x
+KugelY     = Player1.y
 KugelXG    = 4
 KugelYG    = 4
 Highscore  = 0
@@ -319,10 +318,10 @@ while spielaktiv:
                         LevelF = Level*5
                         Feinde = []
                         Feindreturn()
-                        PlayerX = infoObject.current_w /2
-                        PlayerY = infoObject.current_h /2
+                        Player1.x = infoObject.current_w /2
+                        Player1.y = infoObject.current_h /2
                         Win = False
-                        PlayerR = 0
+                        Player1.r = 0
                         if Skinan == 1:
                             Leben = 100
                         if Skinan == 2:
@@ -339,22 +338,22 @@ while spielaktiv:
                         MausP = pygame.mouse.get_pos()
                         window.blit(Hintergrund, pygame.Rect(0, 0, 32, 32))
                         
-                        Soldatw =pygame.transform.rotate(Skina, PlayerR)
-                        window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
+                        Soldatw =pygame.transform.rotate(Skina, Player1.r)
+                        window.blit(Soldatw, (Player1.x - Soldatw.get_width()/2, Player1.y - Soldatw.get_height()/2))
                         if Kugelaktiv:
                             pygame.draw.circle(window, (ORANGE), (KugelX, KugelY), 5)
                             KugelX  = KugelX + KugelXG
                             KugelY  = KugelY + KugelYG
                         
-                        Px = MausP[0] - PlayerX
-                        Py = MausP[1] - PlayerY
+                        Px = MausP[0] - Player1.x
+                        Py = MausP[1] - Player1.y
                         Soldatw2 = math.degrees (math.atan2 (-Py,Px))
                         Soldatw  = pygame.transform.rotate(SkinaK, Soldatw2)
-                        window.blit(Soldatw, (PlayerX - Soldatw.get_width()/2, PlayerY - Soldatw.get_height()/2))
+                        window.blit(Soldatw, (Player1.x - Soldatw.get_width()/2, Player1.y - Soldatw.get_height()/2))
                         
                         for Feind in Feinde:
-                            Fx = PlayerX - Feind[0]
-                            Fy = PlayerY - Feind[1]
+                            Fx = Player1.x - Feind[0]
+                            Fy = Player1.y - Feind[1]
                             Feindw2 = math.degrees (math.atan2 (-Fy,Fx))
                             Feindw =pygame.transform.rotate(FeindB, Feindw2)
                             window.blit(Feindw, (Feind[0] - FeindB.get_width()/2, Feind[1] - FeindB.get_height()/2))
@@ -380,8 +379,8 @@ while spielaktiv:
                         for Feind in Feinde:  
                             FeindX = Feind[0]
                             FeindY = Feind[1]
-                            FeindXG = (FeindX-PlayerX)/100
-                            FeindYG = (FeindY-PlayerY)/100  
+                            FeindXG = (FeindX-Player1.x)/100
+                            FeindYG = (FeindY-Player1.y)/100  
                             divisor = abs(FeindXG)
                             if abs(FeindYG) > divisor:
                                 divisor = abs(FeindYG)
@@ -391,8 +390,8 @@ while spielaktiv:
                             FeindXG  = FeindXG * -5
                             Feind[0]   = FeindX + FeindXG
                             Feind[1]   = FeindY + FeindYG
-                            FeindXA = FeindX - PlayerX
-                            FeindYA = FeindY - PlayerY
+                            FeindXA = FeindX - Player1.x
+                            FeindYA = FeindY - Player1.y
                             FeindA  = math.sqrt(FeindXA ** 2 + FeindYA ** 2)
                             if FeindA < 80:
                                 Leben   -= 1      # Player Hitbox
@@ -445,24 +444,24 @@ while spielaktiv:
                         keys  = pygame.key.get_pressed()
                         mouse = pygame.mouse.get_pressed()
                         if keys[pygame.K_w]:
-                            PlayerX += math.cos(math.radians(-PlayerR))*SkinGes
-                            PlayerY += math.sin(math.radians(-PlayerR))*SkinGes
+                            Player1.x += math.cos(math.radians(-Player1.r))*SkinGes
+                            Player1.y += math.sin(math.radians(-Player1.r))*SkinGes
                         if keys[pygame.K_s]:
-                            PlayerX += math.cos(math.radians(-PlayerR))*-SkinGes
-                            PlayerY += math.sin(math.radians(-PlayerR))*-SkinGes
+                            Player1.x += math.cos(math.radians(-Player1.r))*-SkinGes
+                            Player1.y += math.sin(math.radians(-Player1.r))*-SkinGes
                         if keys[pygame.K_a]:
-                            PlayerR = PlayerR +SkinR
+                            Player1.r = Player1.r +SkinR
                         if keys[pygame.K_d]:
-                            PlayerR = PlayerR -SkinR
+                            Player1.r = Player1.r -SkinR
                         if keys[pygame.K_ESCAPE]:
                             Esc = True
                         if mouse[0] and (not Kugelaktiv):
                             Kugelaktiv = True
                             pygame.mixer.Sound.play(Schuss)
-                            KugelX    = PlayerX
-                            KugelY    = PlayerY
-                            KugelXG = (MausP[0]-PlayerX)/100
-                            KugelYG = (MausP[1]-PlayerY)/100  
+                            KugelX    = Player1.x
+                            KugelY    = Player1.y
+                            KugelXG = (MausP[0]-Player1.x)/100
+                            KugelYG = (MausP[1]-Player1.y)/100  
                             divisor = abs(KugelXG)
                             if abs(KugelYG) > divisor:
                                 divisor = abs(KugelYG)
@@ -470,14 +469,14 @@ while spielaktiv:
                             KugelXG = KugelXG/divisor  
                             KugelYG = KugelYG * SkinG
                             KugelXG = KugelXG * SkinG 
-                        if PlayerX < 20 :
-                            PlayerX = 20
-                        if PlayerY < 20 :
-                            PlayerY = 20
-                        if PlayerX > infoObject.current_w -20 :
-                            PlayerX = infoObject.current_w -20
-                        if PlayerY > infoObject.current_h -20 :
-                            PlayerY = infoObject.current_h-20
+                        if Player1.x < 20 :
+                            Player1.x = 20
+                        if Player1.y < 20 :
+                            Player1.y = 20
+                        if Player1.x > infoObject.current_w -20 :
+                            Player1.x = infoObject.current_w -20
+                        if Player1.y > infoObject.current_h -20 :
+                            Player1.y = infoObject.current_h-20
                     else:
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
@@ -507,10 +506,10 @@ while spielaktiv:
                             Level     = 1
                             Feinde    = []
                             Feindreturn()
-                            PlayerX   = infoObject.current_w /2
-                            PlayerY   = infoObject.current_h /2
+                            Player1.x   = infoObject.current_w /2
+                            Player1.y.x   = infoObject.current_h /2
                             GameoverS = False
-                            PlayerR   = 0
+                            Player1.r   = 0
                             if Skinan == 1:
                                 Leben = 100
                             if Skinan ==2 :
