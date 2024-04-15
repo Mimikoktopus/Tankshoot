@@ -7,6 +7,13 @@ import random
 pygame.init()
 os.chdir(pathlib.Path(__file__).parent.resolve())
 
+#Klassen
+class player :
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+
+
 #Variablen Blog
 ORANGE     = ( 255, 140, 0)
 ROT        = ( 255, 0, 0)
@@ -29,14 +36,14 @@ KugelXG    = 4
 KugelYG    = 4
 Highscore  = 0
 Leben      = 100
-Waehrung   = 0
+Waehrung   = 60
 Feinde     = []
 Skinan     = 1
 SkinanK    = 1
 Equipv     = 0
 Equipv2    = 0
 Equipv3    = 0
-Feindh    = 2
+Feindh     = 2
 
 #Bider, Sounds import
 Fadenkreuz  = pygame.image.load("Fadenkreuz.png")
